@@ -16,14 +16,12 @@ module.exports = function (grunt) {
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
     grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
         watch: {
             options: {
                 nospawn: true
             },
-            less: {
-                files: ['app/styles/*.less'],
-                tasks: ['less:server']
-            },
+
             livereload: {
                 options: {
                     livereload: LIVERELOAD_PORT
@@ -58,25 +56,34 @@ module.exports = function (grunt) {
                 path: 'http://localhost:<%= connect.options.port %>'
             }
         },
-        less: {
-            server: {
+        sass: {
+            dist: {
                 options: {
-                    paths: ['app/components/bootstrap/less', 'app/styles']
+                    style: 'compressed',
+                    compass: true
                 },
-                files: {
-                    'app/styles/main.css': 'app/styles/main.less'
-                }
-            }
-        }
+                files: [{
+                    expand: true,
+                    cwd: 'app/styles',
+                    src: ['*.scss'],
+                    dest: 'app/styles',
+        ext: '.css'
+      }]
+    }
+  }
     });
+
+grunt.loadNpmTasks('grunt-contrib-sass');
+
 
     grunt.registerTask('server', function (target) {
 
         grunt.task.run([
-            'less:server',
+            'sass:dist',
             'connect:livereload',
             'open',
             'watch'
         ]);
     });
+    grunt.registerTask('default', ['sass:dist']);
 };
