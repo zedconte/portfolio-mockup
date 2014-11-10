@@ -1,0 +1,24 @@
+{
+  "name": "Portfolio",
+  "version": "0.0.0",
+  "authors": [
+    "Raul Ortega <raul.ortega@unosquare.com>"
+  ],
+  "description": "Portfolio Mockup to HTML",
+  "main": "app/assets/js/main.js, app/assets/js/main.css",
+  "moduleType": [
+    "yui"
+  ],
+  "keywords": [
+    "HTML5"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/zedconte",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
